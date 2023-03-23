@@ -1,6 +1,6 @@
 module github.com/rockwell-uk/go-diskbench
 
-go 1.17
+go 1.18
 
 require (
 	github.com/rockwell-uk/go-progress v0.0.0-20230323082933-08d00c27811f
