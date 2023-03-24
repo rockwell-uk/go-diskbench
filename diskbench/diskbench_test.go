@@ -5,7 +5,6 @@ import (
 )
 
 func TestBenchDisk(t *testing.T) {
-
 	tests := map[string]struct {
 		bench     DiskBench
 		expectErr bool
@@ -22,7 +21,6 @@ func TestBenchDisk(t *testing.T) {
 	}
 
 	for name, tt := range tests {
-
 		_, err := BenchDisk(tt.bench)
 
 		if tt.expectErr && err == nil {

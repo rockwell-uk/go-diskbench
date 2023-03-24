@@ -29,9 +29,7 @@ type SequentialWritesResult struct {
 }
 
 func (j *SequentialWritesJob) Setup(jobName string, input interface{}) (*progress.Job, error) {
-
 	if bench, ok := input.(DiskBench); ok {
-
 		var tasks []*progress.Task
 		for i := 1; i <= bench.Seconds; i++ {
 			tasks = append(tasks, &progress.Task{
@@ -53,19 +51,16 @@ func (j *SequentialWritesJob) Task(job *progress.Job, input interface{}) (interf
 }
 
 func (j *SequentialWritesJob) Run(job *progress.Job, input interface{}) (interface{}, error) {
-
 	start = time.Now()
 	var took time.Duration
 
 	if bench, ok := input.(DiskBench); ok {
-
 		var duration time.Duration = time.Second * time.Duration(bench.Seconds)
 		var filesWritten int
 
 		var condition bool
 
 		for ok := true; ok; ok = condition {
-
 			condition = time.Since(start) < duration
 
 			elapsed := time.Since(start)
@@ -116,15 +111,12 @@ func (j *SequentialWritesJob) Run(job *progress.Job, input interface{}) (interfa
 }
 
 func writeLines(f *os.File, duration time.Duration) error {
-
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 	done := make(chan struct{}, 1)
 
 	go func(d *os.File, ctx context.Context) {
-
 		for i := 0; i <= DiskBenchNumLines; i++ {
-
 			if _, err := d.WriteString(fmt.Sprintf("%v\n", time.Now().UnixNano())); err != nil {
 				return
 			}
@@ -138,7 +130,6 @@ func writeLines(f *os.File, duration time.Duration) error {
 				return
 			}
 		}
-
 	}(f, ctx)
 
 	end := time.Until(start.Add(duration))

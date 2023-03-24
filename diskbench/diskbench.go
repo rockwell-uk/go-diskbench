@@ -37,7 +37,6 @@ func (r DiskBenchResult) String() string {
 }
 
 func BenchDisk(d DiskBench) (DiskBenchResult, error) {
-
 	var jobName string = "Benchmarking Disk"
 	var took time.Duration
 	var absPath string
@@ -67,6 +66,7 @@ func BenchDisk(d DiskBench) (DiskBenchResult, error) {
 		return DiskBenchResult{}, err
 	}
 	defer job.End(true)
+
 	res, err := j.Run(job, d)
 	if err != nil {
 		return DiskBenchResult{}, err
